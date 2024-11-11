@@ -31,6 +31,16 @@ export class ApiService {
     return this.http.delete(`${this.apiUrl}/location/${id}`);
   }
 
+  addWorkScopeToLocation(
+    locationId: string,
+    workScopeId: string
+  ): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/location/${locationId}/workscope/${workScopeId}`,
+      {}
+    );
+  }
+
   // Work Scopes
   getWorkScopes(): Observable<any> {
     return this.http.get(`${this.apiUrl}/workscope`);

@@ -12,12 +12,14 @@ import { ApiService } from '../../services/api.service';
 })
 export class LocationComponent implements OnInit {
   locations: any[] = [];
+  workScopes: any[] = [];
   newLocation = { name: '', status: 'incomplete' };
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
     this.fetchLocations();
+    this.fetchWorkScopes();
   }
 
   fetchLocations() {
@@ -34,9 +36,11 @@ export class LocationComponent implements OnInit {
   }
 
   updateLocation(location: any) {
-    this.apiService.updateLocation(location._id, { name: location.name }).subscribe(() => {
-      this.fetchLocations();
-    });
+    this.apiService
+      .updateLocation(location._id, { name: location.name })
+      .subscribe(() => {
+        this.fetchLocations();
+      });
   }
 
   updateLocationStatus(id: string) {
@@ -49,5 +53,25 @@ export class LocationComponent implements OnInit {
     this.apiService.deleteLocation(id).subscribe(() => {
       this.fetchLocations();
     });
+  }
+
+  onWorkScopeNameChange(location: any, newName: string) {
+    if (location.workScope) {
+      location.workScope.name = newName;
+    }
+  }
+
+  fetchWorkScopes() {
+    this.apiService.getWorkScopes().subscribe((data) => {
+      this.workScopes = data?.workScopes;
+    });
+  }
+
+  addWorkScopeToLocation(locationId: string, workScopeId: string) {
+    this.apiService
+      .addWorkScopeToLocation(locationId, workScopeId)
+      .subscribe(() => {
+        this.fetchLocations();
+      });
   }
 }
