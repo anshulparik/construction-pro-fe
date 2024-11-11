@@ -61,6 +61,27 @@
         >
           Change Status
         </button>
+        <div class="flex flex-col gap-2">
+          <label for="location" class="text-sm text-gray-400"
+            >Add/Change Workscope:</label
+          >
+          <select
+            id="workScope"
+            [(ngModel)]="location.selectedWorkScope"
+            (change)="
+              addWorkScopeToLocation(location._id, location.selectedWorkScope)
+            "
+            class="text-gray-600 text-[1rem] font-medium outline-none cursor-pointer border-b"
+          >
+            <option
+              *ngFor="let workScope of workScopes"
+              [value]="workScope._id"
+              class="cursor-pointer"
+            >
+              {{ workScope.name }}
+            </option>
+          </select>
+        </div>
         <div class="flex items-center justify-between mt-4">
           <button
             (click)="updateLocation(location)"
