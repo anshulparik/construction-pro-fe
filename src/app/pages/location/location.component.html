@@ -42,7 +42,7 @@
               'text-green-500': location.status === 'complete',
               'text-red-500': location.status !== 'complete'
             }"
-            class="capitalize text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
+            class="capitalize text-[1rem] font-medium outline-none focus:border-b"
           />
         </div>
         <div class="flex items-center gap-2">
@@ -51,7 +51,8 @@
             [ngModel]="location.workScope ? location.workScope.name : ''"
             (ngModelChange)="onWorkScopeNameChange(location, $event)"
             placeholder="N/A"
-            class="text-gray-600 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
+            disabled="true"
+            class="text-gray-600 text-[1rem] font-medium outline-none focus:border-b"
           />
         </div>
 

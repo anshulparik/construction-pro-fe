@@ -4,8 +4,27 @@ import { LogsComponent } from './pages/logs/logs.component';
 import { WorkScopeComponent } from './pages/work-scope/work-scope.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/location', pathMatch: 'full' },
-  { path: 'location', component: LocationComponent },
-  { path: 'logs', component: LogsComponent },
-  { path: 'workscope', component: WorkScopeComponent },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () => {
+      return import('./pages/location/location.component').then(
+        (m) => m.LocationComponent
+      );
+    },
+  },
+  {
+    path: 'workscope',
+    loadComponent: () => {
+      return import('./pages/work-scope/work-scope.component').then(
+        (m) => m.WorkScopeComponent
+      );
+    },
+  },
+  {
+    path: 'logs',
+    loadComponent: () => {
+      return import('./pages/logs/logs.component').then((m) => m.LogsComponent);
+    },
+  },
 ];
