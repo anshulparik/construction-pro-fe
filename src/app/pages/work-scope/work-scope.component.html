@@ -39,37 +39,50 @@
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
   >
     <div *ngFor="let scope of workScopes" class="border p-4 rounded shadow-md">
-      <div class="flex flex-col gap-3">
-        <input
-          [(ngModel)]="scope.name"
-          class="text-gray-600 text-lg font-medium outline-none cursor-pointer focus:border-b"
-        />
-        <input
-          [(ngModel)]="scope.duration"
-          class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
-        />
-        <input
-          [(ngModel)]="scope.displayTime"
-          class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
-        />
-        <input
-          [(ngModel)]="scope.variance"
-          class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
-        />
-        <div class="flex items-center justify-between mt-4">
-          <button
-            (click)="updateWorkScope(scope)"
-            class="text-sm font-medium bg-green-500 text-white px-2 py-1 rounded"
-          >
-            Save
-          </button>
-          <button
-            (click)="deleteWorkScope(scope._id)"
-            class="text-sm font-medium bg-red-500 text-white px-2 py-1 rounded"
-          >
-            Delete
-          </button>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <label for="location" class="text-sm text-gray-400">Scope:</label>
+          <input
+            [(ngModel)]="scope.name"
+            class="capitalize text-gray-600 text-lg font-medium outline-none cursor-pointer focus:border-b"
+          />
         </div>
+        <div class="flex items-center gap-2">
+          <label for="location" class="text-sm text-gray-400">Duration:</label>
+          <input
+            [(ngModel)]="scope.duration"
+            class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          <label for="location" class="text-sm text-gray-400">Time:</label>
+          <input
+            [(ngModel)]="scope.displayTime"
+            class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          <label for="location" class="text-sm text-gray-400">Variance:</label>
+          <input
+            [(ngModel)]="scope.variance"
+            class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
+          />
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mt-4">
+        <button
+          (click)="updateWorkScope(scope)"
+          class="text-sm font-medium bg-green-500 text-white px-2 py-1 rounded"
+        >
+          Save
+        </button>
+        <button
+          (click)="deleteWorkScope(scope._id)"
+          class="text-sm font-medium bg-red-500 text-white px-2 py-1 rounded"
+        >
+          Delete
+        </button>
       </div>
     </div>
   </div>

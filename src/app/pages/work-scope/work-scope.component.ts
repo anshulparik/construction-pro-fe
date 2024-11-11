@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class WorkScopeComponent implements OnInit {
   workScopes: any[] = [];
-  newWorkScope = { name: '', duration: 1, displayTime: '', variance: 1 };
+  newWorkScope = { name: '', duration: '', displayTime: '', variance: '' };
 
   constructor(private apiService: ApiService) {}
 
@@ -31,9 +31,9 @@ export class WorkScopeComponent implements OnInit {
       this.fetchWorkScopes();
       this.newWorkScope = {
         name: '',
-        duration: 1,
+        duration: '',
         displayTime: '',
-        variance: 1,
+        variance: '',
       };
     });
   }
