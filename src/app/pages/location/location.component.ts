@@ -34,7 +34,13 @@ export class LocationComponent implements OnInit {
   }
 
   updateLocation(location: any) {
-    this.apiService.updateLocation(location._id, location).subscribe(() => {
+    this.apiService.updateLocation(location._id, { name: location.name }).subscribe(() => {
+      this.fetchLocations();
+    });
+  }
+
+  updateLocationStatus(id: string) {
+    this.apiService.updateLocationStatus(id).subscribe(() => {
       this.fetchLocations();
     });
   }

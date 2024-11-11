@@ -23,8 +23,12 @@ export class ApiService {
     return this.http.patch(`${this.apiUrl}/location/${id}`, data);
   }
 
+  updateLocationStatus(id: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/location/status/${id}`, {});
+  }
+
   deleteLocation(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/locations/${id}`);
+    return this.http.delete(`${this.apiUrl}/location/${id}`);
   }
 
   // Work Scopes
