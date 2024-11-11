@@ -1,0 +1,29 @@
+<div class="p-4 md:py-4 md:px-6 flex flex-col gap-6">
+  <h1 class="text-xl font-bold text-center text-sky-500 tracking-wide">Logs</h1>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+  >
+    <div *ngFor="let log of logs" class="border p-4 rounded shadow-md">
+      <div class="flex flex-col gap-3">
+        <p class="text-gray-600 text-lg font-medium">{{ log.message }}</p>
+        <div *ngIf="log.isComplete" class="text-green-600">Completed</div>
+
+        <div *ngIf="!log.isComplete" class="flex items-center justify-between">
+          <button
+            (click)="completeLog(log)"
+            class="text-sm font-medium bg-yellow-400 text-white px-2 py-1 rounded"
+          >
+            Complete
+          </button>
+          <button
+            (click)="deleteLog(log._id)"
+            class="text-sm font-medium bg-red-500 text-white px-2 py-1 rounded"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

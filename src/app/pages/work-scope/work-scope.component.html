@@ -1,0 +1,76 @@
+<div class="p-4 md:py-4 md:px-6 flex flex-col gap-6">
+  <h1 class="text-xl font-bold text-center text-sky-500 tracking-wide">
+    Work Scopes
+  </h1>
+  <div class="flex flex-col gap-4">
+    <input
+      type="text"
+      placeholder="Scope Name"
+      [(ngModel)]="newWorkScope.name"
+      class="outline-none border p-2 rounded"
+    />
+    <input
+      type="number"
+      placeholder="Duration (days)"
+      [(ngModel)]="newWorkScope.duration"
+      class="outline-none border p-2 rounded"
+    />
+    <input
+      type="text"
+      placeholder="Display Time"
+      [(ngModel)]="newWorkScope.displayTime"
+      class="outline-none border p-2 rounded"
+    />
+    <input
+      type="number"
+      placeholder="Variance (hours)"
+      [(ngModel)]="newWorkScope.variance"
+      class="outline-none border p-2 rounded"
+    />
+    <button
+      (click)="addWorkScope()"
+      class="bg-blue-500 text-white px-3 py-1 rounded cursor-pointer"
+    >
+      Add Scope
+    </button>
+  </div>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+  >
+    <div *ngFor="let scope of workScopes" class="border p-4 rounded shadow-md">
+      <div class="flex flex-col gap-3">
+        <input
+          [(ngModel)]="scope.name"
+          class="text-gray-600 text-lg font-medium outline-none cursor-pointer focus:border-b"
+        />
+        <input
+          [(ngModel)]="scope.duration"
+          class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
+        />
+        <input
+          [(ngModel)]="scope.displayTime"
+          class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
+        />
+        <input
+          [(ngModel)]="scope.variance"
+          class="text-gray-400 text-[1rem] font-medium outline-none cursor-pointer focus:border-b"
+        />
+        <div class="flex items-center justify-between mt-4">
+          <button
+            (click)="updateWorkScope(scope)"
+            class="text-sm font-medium bg-green-500 text-white px-2 py-1 rounded"
+          >
+            Save
+          </button>
+          <button
+            (click)="deleteWorkScope(scope._id)"
+            class="text-sm font-medium bg-red-500 text-white px-2 py-1 rounded"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
