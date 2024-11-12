@@ -60,7 +60,7 @@ export class ApiService {
 
   // Logs
   getLogs(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/logs`);
+    return this.http.get(`${this.apiUrl}/logs/display`);
   }
 
   completeLog(id: string): Observable<any> {
