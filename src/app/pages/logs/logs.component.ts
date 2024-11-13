@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Logs } from '../../../utils/types';
 
 @Component({
   selector: 'app-logs',
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./logs.component.css'],
 })
 export class LogsComponent implements OnInit, OnDestroy {
-  logs: any[] = [];
+  logs: Logs[] = [];
   private fetchInterval: any;
 
   constructor(private apiService: ApiService) {}
@@ -32,11 +33,11 @@ export class LogsComponent implements OnInit, OnDestroy {
 
   fetchLogs() {
     this.apiService.getLogs().subscribe((data) => {
-      this.logs = data?.filteredLogs;
+      this.logs = data?.filteredLogs as Logs[];
     });
   }
 
-  completeLog(log: any) {
+  completeLog(log: Logs) {
     this.apiService.completeLog(log._id).subscribe(() => {
       log.isComplete = true;
     });

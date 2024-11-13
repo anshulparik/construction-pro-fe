@@ -33,7 +33,7 @@ export class ApiService {
 
   addWorkScopeToLocation(
     locationId: string,
-    workScopeId: string
+    workScopeId: string | undefined
   ): Observable<any> {
     return this.http.post(
       `${this.apiUrl}/location/${locationId}/workscope/${workScopeId}`,

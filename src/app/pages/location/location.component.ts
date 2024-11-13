@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { Location, WorkScope } from '../../../utils/types';
 
 @Component({
   selector: 'app-location',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './location.component.html',
-  styleUrl: './location.component.css',
+  styleUrls: ['./location.component.css'],
 })
 export class LocationComponent implements OnInit {
-  locations: any[] = [];
-  workScopes: any[] = [];
-  newLocation = { name: '', status: 'incomplete' };
+  locations: Location[] = [];
+  workScopes: WorkScope[] = [];
+  newLocation: Partial<Location> = { name: '', status: 'incomplete' };
 
   constructor(private apiService: ApiService) {}
 
@@ -24,7 +25,7 @@ export class LocationComponent implements OnInit {
 
   fetchLocations() {
     this.apiService.getLocations().subscribe((data) => {
-      this.locations = data.locations;
+      this.locations = data.locations as Location[];
     });
   }
 
@@ -35,7 +36,7 @@ export class LocationComponent implements OnInit {
     });
   }
 
-  updateLocation(location: any) {
+  updateLocation(location: Location) {
     this.apiService
       .updateLocation(location._id, { name: location.name })
       .subscribe(() => {
@@ -55,23 +56,29 @@ export class LocationComponent implements OnInit {
     });
   }
 
-  onWorkScopeNameChange(location: any, newName: string) {
-    if (location.workScope) {
-      location.workScope.name = newName;
+  onWorkScopeNameChange(location: Location, newName: string) {
+    if (location.workScope && typeof location.workScope !== 'string') {
+      (location.workScope as WorkScope).name = newName;
     }
   }
 
   fetchWorkScopes() {
     this.apiService.getWorkScopes().subscribe((data) => {
-      this.workScopes = data?.workScopes;
+      this.workScopes = data?.workScopes as WorkScope[];
     });
   }
 
-  addWorkScopeToLocation(locationId: string, workScopeId: string) {
+  addWorkScopeToLocation(locationId: string, workScopeId: string | undefined) {
     this.apiService
       .addWorkScopeToLocation(locationId, workScopeId)
       .subscribe(() => {
         this.fetchLocations();
       });
+  }
+
+  isWorkScopeObject(workScope: string | WorkScope): workScope is WorkScope {
+    return (
+      typeof workScope === 'object' && workScope !== null && 'name' in workScope
+    );
   }
 }

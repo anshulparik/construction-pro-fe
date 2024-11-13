@@ -2,7 +2,9 @@
   <h1 class="text-xl font-bold text-center text-sky-500 tracking-wide">
     Locations
   </h1>
-    <div class="flex flex-col gap-4 min-w-full md:min-w-[576px] max-w-xl self-center">
+  <div
+    class="flex flex-col gap-4 min-w-full md:min-w-[576px] max-w-xl self-center"
+  >
     <input
       type="text"
       placeholder="Location Name"
@@ -48,7 +50,11 @@
         <div class="flex items-center gap-2">
           <label for="location" class="text-sm text-gray-400">Workscope:</label>
           <input
-            [ngModel]="location.workScope ? location.workScope.name : ''"
+            [ngModel]="
+              location.workScope && isWorkScopeObject(location.workScope)
+                ? location.workScope.name
+                : ''
+            "
             (ngModelChange)="onWorkScopeNameChange(location, $event)"
             placeholder="N/A"
             disabled="true"
